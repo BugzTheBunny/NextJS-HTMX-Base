@@ -42,7 +42,8 @@ app.get('/', (req, res) => {
            hx-post="/goals"
            hx-target="#goals"
            hx-swap="beforeend"
-           hx-on:submit="this.reset()"
+           hx-on::after-request="this.reset()"
+           hx-disabled-elt="form button"
            >
             <div>
               <label htmlFor="goal">Goal</label>
@@ -69,8 +70,10 @@ app.post("/goals",(req,res) => {
   const goalText = req.body.goal;
   const id = new Date().getTime().toString();
   courseGoals.push({text:goalText, id: id});
-
-  res.send(renderGoalListItem(id,goalText));
+  setTimeout(() => 
+    {
+      res.send(renderGoalListItem(id,goalText));
+    },1000)
 })
 
 app.delete("/goals/:id" ,(req,res) => {
