@@ -45,7 +45,9 @@ app.delete('/places/:id', (req, res) => {
     (loc) => loc.id === locationId
   );
   INTERESTING_LOCATIONS.splice(locationIndex, 1);
-
+  const availableLocations = AVAILABLE_LOCATIONS.filter(
+    (location) => !INTERESTING_LOCATIONS.includes(location)
+  );
   res.send(
     `
     <ul id="available-locations" class="locations" hx-swap-oob="true">
