@@ -1,4 +1,8 @@
 function showConfirmationModal(event) {
+    if (event.detail.path === "/suggested-locations") {
+        return;
+    }
+
     event.preventDefault();
     console.log(event)
     const action = event.detail.elt.dataset.action;
@@ -28,7 +32,7 @@ function showConfirmationModal(event) {
     });
 
     const yesBtn = document.getElementById('action-yes')
-    noBtn.addEventListener('click',function() {
+    yesBtn.addEventListener('click',function() {
         event.detail.issueRequest();
         dialog.remove();
     });
